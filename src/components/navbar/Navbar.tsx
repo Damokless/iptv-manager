@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from "react";
 export default function Navbar() {
   const [tab, setTab] = useState('')
