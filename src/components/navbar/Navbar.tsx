@@ -7,7 +7,7 @@ export default function Navbar() {
     setTab(window.location.href.split(/\S+\//gm)[1])
   }, [])
   return (
-    <header className="bg-white border shadow-lg">
+    <header className="bg-white border-b border-blue-700/60 shadow-lg">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-end md:justify-center">
           <div className="hidden md:block">
