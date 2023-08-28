@@ -19,7 +19,7 @@ export default function Home() {
             </p>
 
             <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <a className="block w-full rounded bg-white border border-blue-700 shadow-lg px-12 py-3 text-sm font-medium text-black hover:bg-blue-700 hover:text-white focus:outline-none focus:ring-none sm:w-auto" href="/playlist-manager">
+              <a className="block w-full rounded bg-white border border-blue-700 shadow-lg px-12 py-3 text-sm font-medium text-black hover:bg-blue-500 hover:text-white focus:outline-none focus:ring-none sm:w-auto" href="/playlist-manager">
                 Get Started
               </a>
             </div>
