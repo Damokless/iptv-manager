@@ -7,6 +7,7 @@ interface Channel {
   tvgLogo: string;
   tvgId: string;
   name: string;
+  id: number;
 }
 
 export default function PlaylistManager() {
@@ -15,6 +16,9 @@ export default function PlaylistManager() {
     const dataText = await file[0].text();
     const channelsList = await fetch(`http://localhost:4000/playlistToJson`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ data: dataText })}).then(res => res.json()).then(data => {return data});
     setChannels(channelsList);
+  }
+  function deleteChannel(id: number) {
+    setChannels(channels.filter((channel : Channel) => channel.id !== id))
   }
   console.log(channels)
   return (
@@ -48,7 +52,7 @@ export default function PlaylistManager() {
               <p className="text-center text-gray-600 mt-1">{channel.name}</p>
               <div className="flex justify-center mt-5">
                 <div className="mt-8 flex flex-wrap justify-center gap-4">
-                  <button className="block w-full rounded bg-white border border-red-700 shadow-lg px-12 py-3 text-sm font-medium text-black hover:bg-red-500 hover:text-white focus:outline-none focus:ring-none sm:w-auto">
+                  <button onClick={() => deleteChannel(channel.id)} className="block w-full rounded bg-white border border-red-700 shadow-lg px-12 py-3 text-sm font-medium text-black hover:bg-red-500 hover:text-white focus:outline-none focus:ring-none sm:w-auto">
                     Delete
                   </button>
                 </div>
