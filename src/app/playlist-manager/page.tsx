@@ -13,9 +13,11 @@ interface Channel {
 export default function PlaylistManager() {
   const [channels, setChannels] = useState([]);
   async function handleFile(file: any) {
-    const dataText = await file[0].text();
-    const channelsList = await fetch(`http://localhost:4000/playlistToJson`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ data: dataText })}).then(res => res.json()).then(data => {return data});
-    setChannels(channelsList);
+    if (file) {
+      const dataText = await file[0].text();
+      const channelsList = await fetch(`http://localhost:4000/playlistToJson`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ data: dataText })}).then(res => res.json()).then(data => {return data});
+      setChannels(channelsList);
+    }
   }
   function deleteChannel(id: number) {
     setChannels(channels.filter((channel : Channel) => channel.id !== id))
