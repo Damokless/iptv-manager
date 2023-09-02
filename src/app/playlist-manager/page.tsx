@@ -2,14 +2,7 @@
 import Navbar from "@/components/navbar/Navbar";
 import Image from "next/image";
 import { useState } from "react";
-interface Channel {
-  url: string;
-  tvgLogo: string;
-  tvgId: string;
-  name: string;
-  groupTitle: string;
-  id: number;
-}
+import { Channel } from "@/interfaces/Channel";
 
 export default function PlaylistManager() {
   const [channels, setChannels] = useState<Channel[]>([]);
