@@ -25,9 +25,6 @@ export default function PlaylistManager() {
   function deleteChannel(id: number) {
     setChannels(channels.filter((channel : Channel) => channel.id !== id))
   }
-  function test(logoUrl:string, id: number) {
-    channels[id].tvgLogo = logoUrl
-  }
   console.log(channels)
   return (
     <div className="bg-gray-100 h-screen">
