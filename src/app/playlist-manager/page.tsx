@@ -7,11 +7,14 @@ interface Channel {
   tvgLogo: string;
   tvgId: string;
   name: string;
+  groupTitle: string;
   id: number;
 }
 
 export default function PlaylistManager() {
-  const [channels, setChannels] = useState([]);
+  const [channels, setChannels] = useState<Channel[]>([]);
+  const [showModal, setShowModal] = useState(false);
+  const [channelIndex, setChannelIndex] = useState(0)
   async function handleFile(file: any) {
     if (file) {
       const dataText = await file[0].text();
@@ -21,6 +24,9 @@ export default function PlaylistManager() {
   }
   function deleteChannel(id: number) {
     setChannels(channels.filter((channel : Channel) => channel.id !== id))
+  }
+  function test(logoUrl:string, id: number) {
+    channels[id].tvgLogo = logoUrl
   }
   console.log(channels)
   return (
@@ -54,6 +60,9 @@ export default function PlaylistManager() {
               <p className="text-center text-gray-600 mt-1">{channel.name}</p>
               <div className="flex justify-center mt-5">
                 <div className="mt-8 flex flex-wrap justify-center gap-4">
+                <button onClick={() => {setShowModal(!showModal); setChannelIndex(channels.findIndex((element : Channel) => element.id === channel.id))}} className="block w-full rounded bg-white border border-red-700 shadow-lg px-12 py-3 text-sm font-medium text-black hover:bg-red-500 hover:text-white focus:outline-none focus:ring-none sm:w-auto">
+                    Edit
+                  </button>
                   <button onClick={() => deleteChannel(channel.id)} className="block w-full rounded bg-white border border-red-700 shadow-lg px-12 py-3 text-sm font-medium text-black hover:bg-red-500 hover:text-white focus:outline-none focus:ring-none sm:w-auto">
                     Delete
                   </button>
@@ -62,6 +71,79 @@ export default function PlaylistManager() {
             </div>
           ))}
         </div>
+        {showModal && (
+          <>
+          <div className="min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none">
+              <div className="absolute bg-black opacity-80 inset-0 z-0"></div>
+              <div className="w-full  max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-gray-100 ">
+                <div className="">
+                  <div className="text-center p-5 flex-auto justify-center">
+                    <div>
+                      <label htmlFor="ChannelLogo" className="block text-start font-medium text-gray-700">
+                        Channel logo URL
+                      </label>
+
+                      <input
+                        id="ChannelLogo"
+                        defaultValue={channels[channelIndex].tvgLogo}
+                        onChange={(e) => channels[channelIndex].tvgLogo = e.target.value}
+                        className="mt-1 w-full p-1 rounded-md border-gray-200 shadow-sm "
+                      />
+                      <label htmlFor="ChannelURL" className="block text-start font-medium text-gray-700">
+                        Channel URL
+                      </label>
+
+                      <input
+                        id="ChannelURL"
+                        defaultValue={channels[channelIndex].url}
+                        onChange={(e) => channels[channelIndex].url = e.target.value}
+                        className="mt-1 w-full p-1 rounded-md border-gray-200 shadow-sm "
+                      />
+                      <label htmlFor="ChannelID" className="block text-start font-medium text-gray-700">
+                        Channel ID
+                      </label>
+
+                      <input
+                        id="ChannelID"
+                        defaultValue={channels[channelIndex].tvgId}
+                        onChange={(e) => channels[channelIndex].tvgId = e.target.value}
+                        className="mt-1 w-full p-1 rounded-md border-gray-200 shadow-sm "
+                      />
+                      <label htmlFor="ChannelName" className="block text-start font-medium text-gray-700">
+                        Channel Name
+                      </label>
+
+                      <input
+                        id="ChannelName"
+                        defaultValue={channels[channelIndex].name}
+                        onChange={(e) => channels[channelIndex].name = e.target.value}
+                        className="mt-1 w-full p-1 rounded-md border-gray-200 shadow-sm "
+                      />
+                      <label htmlFor="ChannelGroupName" className="block text-start font-medium text-gray-700">
+                        Channel group name
+                      </label>
+
+                      <input
+                        id="ChannelGroupName"
+                        defaultValue={channels[channelIndex].groupTitle}
+                        onChange={(e) => channels[channelIndex].groupTitle = e.target.value}
+                        className="mt-1 w-full p-1 rounded-md border-gray-200 shadow-sm "
+                      />
+                    </div>
+                  </div>
+                  <div className="flex p-3 mt-2 text-center space-x-4 md:block">
+                      <button onClick={() => setShowModal(!showModal)} className="w-48 rounded bg-white border shadow-lg px-12 py-3 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-black focus:outline-none focus:ring-none">
+                        Cancel
+                      </button>
+                      <button onClick={() => setShowModal(!showModal)} className="w-48 rounded bg-white border border-green-700 shadow-lg px-12 py-3 text-sm font-medium text-black hover:bg-green-500 hover:text-white focus:outline-none focus:ring-none">
+                        Save changes
+                      </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
         <div className=" flex flex-wrap justify-center gap-4 bg-gray-100">
           <a className="block w-full rounded bg-white border border-green-700 shadow-lg px-12 py-3 text-sm font-medium text-black hover:bg-green-500 hover:text-white focus:outline-none focus:ring-none sm:w-auto" href="/playlist-manager">
             Save playlist
