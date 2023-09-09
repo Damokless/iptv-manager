@@ -50,7 +50,7 @@ export default function PlaylistManager() {
               <p className="text-center text-gray-600 mt-1">{channel.name}</p>
               <div className="flex justify-center mt-5">
                 <div className="mt-8 flex flex-wrap justify-center gap-4">
-                <button onClick={() => {setShowModal(!showModal); setChannelIndex(channels.findIndex((element : Channel) => element.id === channel.id))}} className="block w-full rounded bg-white border border-red-700 shadow-lg px-12 py-3 text-sm font-medium text-black hover:bg-red-500 hover:text-white focus:outline-none focus:ring-none sm:w-auto">
+                <button onClick={() => {setShowModal(!showModal); setChannelIndex(channels.findIndex((element : Channel) => element.id === channel.id))}} className="block w-full rounded bg-white border border-blue-700 shadow-lg px-12 py-3 text-sm font-medium text-black hover:bg-blue-500 hover:text-white focus:outline-none focus:ring-none sm:w-auto">
                     Edit
                   </button>
                   <button onClick={() => deleteChannel(channel.id)} className="block w-full rounded bg-white border border-red-700 shadow-lg px-12 py-3 text-sm font-medium text-black hover:bg-red-500 hover:text-white focus:outline-none focus:ring-none sm:w-auto">
