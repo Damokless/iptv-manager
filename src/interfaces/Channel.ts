@@ -5,4 +5,5 @@ export interface Channel {
   name: string;
   groupTitle: string;
   id: number;
+  liveStatus : number
 }
