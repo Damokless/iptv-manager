@@ -1,9 +1,6 @@
-import Navbar from "@/components/navbar/Navbar";
-
 export default function Home() {
   return (
     <div className="bg-gray-100 h-screen">
-      <Navbar />
       <section>
         <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:items-center">
           <div className="mx-auto text-center">
@@ -20,7 +17,10 @@ export default function Home() {
 
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <a className="block w-full rounded bg-white border border-blue-700 shadow-lg px-12 py-3 text-sm font-medium text-black hover:bg-blue-500 hover:text-white focus:outline-none focus:ring-none sm:w-auto" href="/playlist-manager">
-                Get Started
+                Playlist Manager
+              </a>
+              <a className="block w-full rounded bg-white border border-blue-700 shadow-lg px-12 py-3 text-sm font-medium text-black hover:bg-blue-500 hover:text-white focus:outline-none focus:ring-none sm:w-auto" href="/playlist-checker">
+                Playlist Checker
               </a>
             </div>
           </div>
