@@ -37,7 +37,6 @@ export default function PlaylistManager() {
 
       window.URL.revokeObjectURL(url);
   }
-  console.log(channels)
   return (
     <div className="bg-gray-100 h-screen">
       <Navbar />
