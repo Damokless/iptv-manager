@@ -18,7 +18,23 @@ export default function PlaylistManager() {
   function deleteChannel(id: number) {
     setChannels(channels.filter((channel : Channel) => channel.id !== id))
   }
-  console.log(channels)
+  async function savePlaylist() {
+    const m3ufile = await fetch(`http://localhost:4000/jsonToPlaylist`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ channels: channels })})
+    .then(res => res.json())
+    .then(data => {return data.m3uText});
+      const blob = new Blob([m3ufile], { type: 'text/plain' });
+
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = 'playlist.m3u';
+      document.body.appendChild(a);
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+  }
   return (
     <div className="bg-gray-100 h-screen">
       <Navbar />
@@ -59,8 +75,8 @@ export default function PlaylistManager() {
             </div>
           ))}
         </div>
-        <div className=" flex flex-wrap justify-center gap-4 bg-gray-100">
-          <a className="block w-full rounded bg-white border border-green-700 shadow-lg px-12 py-3 text-sm font-medium text-black hover:bg-green-500 hover:text-white focus:outline-none focus:ring-none sm:w-auto" href="/playlist-manager">
+        <div onClick={() => savePlaylist()} className=" flex flex-wrap justify-center gap-4 bg-gray-100">
+          <a className="block w-full rounded bg-white border border-green-700 shadow-lg px-12 py-3 text-sm font-medium text-black hover:bg-green-500 hover:text-white focus:outline-none focus:ring-none sm:w-auto">
             Save playlist
           </a>
         </div>
